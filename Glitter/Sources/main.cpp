@@ -6,8 +6,9 @@
 #include <GLFW/glfw3.h>
 
 // Standard Headers
-#include <cstdio>
-#include <cstdlib>
+#include <iostream>
+//#include <cstdio>
+//#include <cstdlib>
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -106,14 +107,19 @@ int main(int argc, char * argv[])
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	// ------------------------------------------------------------------
 	float vertices[] = {
-		 0.5f,  0.5f, 0.0f,  // top right
-		 0.5f, -0.5f, 0.0f,  // bottom right
-		-0.5f, -0.5f, 0.0f,  // bottom left
-		-0.5f,  0.5f, 0.0f   // top left 
+		// first triangle
+				-0.9f, -0.5f, 0.0f,  // left 
+				-0.0f, -0.5f, 0.0f,  // right
+				-0.45f, 0.5f, 0.0f,  // top 
+				// second triangle
+				 0.0f, -0.5f, 0.0f,  // left
+				 0.9f, -0.5f, 0.0f,  // right
+				 0.45f, 0.5f, 0.0f,   // top 
 	};
+
 	unsigned int indices[] = {  // note that we start from 0!
-		0, 1, 3,  // first Triangle
-		1, 2, 3   // second Triangle
+		0, 1, 2,  // first Triangle
+		3, 4, 5,   // second Triangle
 	};
 	unsigned int VBO, VAO, EBO;
 	glGenVertexArrays(1, &VAO);

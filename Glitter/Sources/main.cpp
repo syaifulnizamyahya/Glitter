@@ -34,9 +34,10 @@ const char *fragmentShader1Source = "#version 330 core\n"
 "}\n\0";
 const char *fragmentShader2Source = "#version 330 core\n"
 "out vec4 FragColor;\n"
+"uniform vec4 ourColor;\n"
 "void main()\n"
 "{\n"
-"   FragColor = vec4(0.7f, 1.0f, 0.0f, 1.0f);\n"
+"   FragColor = ourColor;\n"
 "}\n\0";
 
 int main(int argc, char * argv[]) 
@@ -203,6 +204,11 @@ int main(int argc, char * argv[])
 		
 		glUseProgram(shaderProgram2);
 		glBindVertexArray(VAO[1]); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	   // update shader uniform
+		float timeValue = glfwGetTime();
+		float greenValue = sin(timeValue) / 2.0f + 0.5f;
+		int vertexColorLocation = glGetUniformLocation(shaderProgram2, "ourColor");
+		glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 		glDrawArrays(GL_TRIANGLES, 0, 3); // set the count to 6 since we're drawing 6 vertices now (2 triangles); not 3!
 		// glBindVertexArray(0); // no need to unbind it every time 
 
